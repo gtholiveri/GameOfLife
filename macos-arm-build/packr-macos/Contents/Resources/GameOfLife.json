@@ -1,0 +1,12 @@
+{
+  "jrePath": "jre",
+  "classPath": [
+    "GameOfLife-1.0.0.jar"
+  ],
+  "mainClass": "com.GameOfLife.lwjgl3.Lwjgl3Launcher",
+  "useZgcIfSupportedOs": false,
+  "vmArgs": [
+    "-Xmx1G",
+    "-XstartOnFirstThread"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "platform": "mac",
+  "jdk": "jdk-17-macos-x64",
+  "executable": "GameOfLife",
+  "classpath": ["lwjgl3/build/libs/GameOfLife-1.0.0.jar"],
+  "mainclass": "com.GameOfLife.lwjgl3.Lwjgl3Launcher",
+  "vmargs": ["-Xmx1G", "-XstartOnFirstThread"],
+  "resources": ["assets"],
+  "output": "macos-x64-build/packr-macos"
+}
