@@ -60,7 +60,9 @@ public class ArgParser {
             }
         }
 
-        throw new IllegalArgumentException("No valid filepath detected in program arguments. Try running again.");
+        String randomPattern = patterns.get((int) (Math.random() * patterns.size()));
+        Gdx.app.log("Args", "No valid start pattern filename found in args, random pattern chosen: " + randomPattern);
+        return randomPattern;
     }
 
     public int getGens() {
@@ -111,7 +113,7 @@ public class ArgParser {
                     assertValidStyle(style);
                     return style;
                 } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
+                    Gdx.app.log("Args", "Invalid style given, default style chosen instead");
                     return  "default";
                 }
 
@@ -145,7 +147,7 @@ public class ArgParser {
         String str = file.readString();
         String[] assetArr = str.split("\n");
 
-        ArrayList<String> patternList = new ArrayList<String>();
+        ArrayList<String> patternList = new ArrayList<>();
         for (String asset : assetArr) {
             if (asset.startsWith("patterns/")) {
                 patternList.add(asset.substring(9, asset.length() - 4));
