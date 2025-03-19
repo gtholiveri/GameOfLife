@@ -2,9 +2,20 @@
 
 ## How to Grade / Run
 All the code I wrote for the application is in core/src/main/java/com/GameOfLife and in lwjgl3/src/main/java/com/GameOfLife/lwjgl3/Lwjgl3Launcher.java
-Assets are in assets
+
 Everything else is related to the library or build pipeline for libgdx
-To run, you can either run a .jar of the project or run a .app bundle of the project. Both will have to be from the command line, make sure to use ./
+
+To run, you can either run a .jar, run a .app bundle, or compile it yourself. I recommend one of the first two for reliability. If you want to compile and run yourself:
+  Use the RunDesktop run configuration in .idea/runConfigurations
+
+  OR
+  
+  Create a new run configuration, choose application
+  The main class is in lwjgl3/src/main/java/com/GameOfLife/lwjgl3/Lwjgl3Launcher.java
+  Add in the vm arguments -XstartOnFirstThread if you're on mac
+  Then run it—Gradle should be preinstalled with intelliJ and be able to use the already-defined gradle stuff to build and run the project.
+
+.jar or .app files will have to be from the command line to use program arguments, make sure to use ./
 The program can simulate from any of the given patterns (although "Elemtary Knightship" was changed to "elementaryknightship")
 It also has different styles, which control how the cells look. You can set the style by passing in -style "style here" from the command line.
 The available styles are default, seaLantern, redstone, and moss.
