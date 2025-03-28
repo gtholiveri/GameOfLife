@@ -4,22 +4,26 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 public class Panner extends InputAdapter {
     private final Vector3 lastTouch; // Store last mouse position
     private final OrthographicCamera camera;
+    private final GameStage gameStage;
 
+    private boolean currentlyZoomingToFit;
 
-    // Variables for mouse dragging
-    private boolean isDragging = false;
-    Vector2 lastMousePos = new Vector2(); // Last mouse position
+    private final float zoomToFitSpeed = 0.2f;
 
-    public Panner(OrthographicCamera camera) {
+    public Panner(OrthographicCamera camera, GameStage gameStage) {
         this.camera = camera;
         lastTouch = new Vector3();
 
+        currentlyZoomingToFit = false;
+
+        this.gameStage = gameStage;
     }
 
     public void handleKeyPanInput() {
@@ -28,34 +32,32 @@ public class Panner extends InputAdapter {
 
         // Zoom in with Z key (decrease the viewport size)
         if (Gdx.input.isKeyPressed(Input.Keys.MINUS)) {
-            // Gdx.app.log("Panner", "Zooming out");
             camera.zoom *= 1f + zoomSpeed; // Zoom out
         }
         // Zoom out with X key (increase the viewport size)
         if (Gdx.input.isKeyPressed(Input.Keys.EQUALS)) {
-            // Gdx.app.log("Panner", "Zooming in");
+
             camera.zoom *= 1f - zoomSpeed;
         }
 
         // Pan the camera left or right with arrow keys
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            // Gdx.app.log("Panner", "Panning left");
+
 
             camera.position.x -= panSpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            // Gdx.app.log("Panner", "Panning right");
 
             camera.position.x += panSpeed;
         }
         // Pan the camera up or down with arrow keys
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            // Gdx.app.log("Panner", "Panning up");
+
 
             camera.position.y += panSpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            // Gdx.app.log("Panner", "Panning down");
+
 
             camera.position.y -= panSpeed;
         }
@@ -71,6 +73,47 @@ public class Panner extends InputAdapter {
             lastTouch.set(screenX, screenY, 0);
         }
         return true;
+    }
+
+
+    public void zoomToFit() {
+        currentlyZoomingToFit = true;
+    }
+
+    public  void applyZoomToFit() {
+        //
+        float maxVisWidth = gameStage.getViewport().getWorldWidth();
+        float maxVisHeight = gameStage.getViewport().getWorldHeight() - gameStage.getUIHeight();
+        float actualHeight = gameStage.getRenderer().getBoardActualHeight(gameStage.getEngine().getBoard());
+
+        float UI_HEIGHT = gameStage.getUIHeight();
+
+        int scrWidth = Gdx.graphics.getWidth();
+        int scrHeight = Gdx.graphics.getHeight();
+
+        float targetZoom = 1f;
+
+        if (maxVisHeight < maxVisWidth) {
+            // We can fit LESS stuff in VERTICALLY, so we need to use VERTICAL constraints
+            float targVisHeight = actualHeight;
+            targetZoom = targVisHeight / (scrHeight - UI_HEIGHT);
+
+
+
+        } else if (maxVisWidth < maxVisHeight){
+            // We can fit LESS stuff in HORIZONTALLY, so we need to use HORIZONTAL constraints
+            float targVisWidth = maxVisWidth;
+            targetZoom = targVisWidth / gameStage.getViewport().getWorldWidth();
+        }
+
+        if (currentlyZoomingToFit) {
+            camera.zoom = Interpolation.smooth.apply(camera.zoom, targetZoom, zoomToFitSpeed);
+            camera.update(); // Ensure the camera updates its transformations
+        }
+//Math.abs(a - b) <= tolerance;
+        if (Math.abs(targetZoom - camera.zoom) < 0.005f) {
+            currentlyZoomingToFit = false;
+        }
     }
 
     @Override

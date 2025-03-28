@@ -25,4 +25,12 @@ public class TimeController {
     }
 
 
+    public void setSpeed(float speed) {
+        interval = 1f / speed;
+    }
+
+    public float getSpeed() {
+        return 1f / interval;
+    }
+
 }

@@ -102,7 +102,7 @@ public class ArgParser {
         }
 
         // default: 10
-        return 10;
+        return 60;
     }
 
     public String getStyle() {

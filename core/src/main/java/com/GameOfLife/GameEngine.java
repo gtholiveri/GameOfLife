@@ -5,10 +5,14 @@ public class GameEngine {
     private int currGen;
     private boolean[][] board;
 
+    private boolean isRunning;
+
     public GameEngine(boolean[][] startBoard, int totalGens) {
         this.board = startBoard;
         this.totalGens = totalGens;
         this.currGen = 0;
+
+        isRunning = false;
     }
 
     public void advanceGeneration() {
@@ -83,6 +87,22 @@ public class GameEngine {
 
     public int getCurrGen() {
         return currGen;
+    }
+
+    public void toggleRunning() {
+        isRunning = !isRunning;
+    }
+
+    public void run() {
+        isRunning = true;
+    }
+
+    public void stop() {
+        isRunning = false;
+    }
+
+    public boolean getIsRunning() {
+        return isRunning;
     }
 
 
