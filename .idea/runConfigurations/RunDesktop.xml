@@ -2,7 +2,7 @@
   <configuration default="false" name="RunDesktop" type="Application" factoryName="Application" focusToolWindowBeforeRun="true">
     <option name="MAIN_CLASS_NAME" value="com.GameOfLife.lwjgl3.Lwjgl3Launcher" />
     <module name="GameOfLife.lwjgl3.main" />
-    <option name="PROGRAM_PARAMETERS" value="-speed 60 -center glidergun -style redstone -size 40" />
+    <option name="PROGRAM_PARAMETERS" value="spacefiller -rows 50 -columns 130 -generations 100 -pixels 10 -speed 5 -center " />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
