@@ -49,14 +49,14 @@ public class BoardRenderer implements Disposable {
         batch.setProjectionMatrix(camera.combined);
 
         float worldWidth = viewport.getWorldWidth();
-        float worldHeight = viewport.getWorldWidth();
+        float worldHeight = viewport.getWorldHeight();
 
         float cellSize = Math.min(worldHeight / board.length, worldWidth / board[0].length);
 
         viewport.apply();
         batch.begin();
         // draw in background
-        batch.draw(background, 0, 0, worldWidth, worldHeight);
+        batch.draw(background, 0, 0, board[0].length * cellSize, board.length * cellSize);
 
         for (int r = board.length - 1; r >= 0; r--) {
             for (int c = 0; c < board[r].length; c++) {
