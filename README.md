@@ -1,27 +1,60 @@
 # GameOfLife
 
 ## How to Grade / Run
-All the code I wrote for the application is in core/src/main/java/com/GameOfLife and in lwjgl3/src/main/java/com/GameOfLife/lwjgl3/Lwjgl3Launcher.java
+All the code I wrote for the application is in:  
+`core/src/main/java/com/GameOfLife`  
+and in  
+`lwjgl3/src/main/java/com/GameOfLife/lwjgl3/Lwjgl3Launcher.java`
 
-Everything else is related to the library or build pipeline for libgdx
+Everything else is related to the library or build pipeline for libGDX.
 
-To run, you can either run a .app bundle, run a .jar, or compile it yourself. 
-Compiled .jar or .app can be found in the finalBuild folder
-The compiled .app bundle, which should have a jdk bundled with it, is found in the finalBuild folder. The .app file is secretly a folder, you can look inside it to find the .jar if you want to run that instead
-.jar or .app files will have to be from the command line to use program arguments, make sure to use "./" before the name of the executable. Without program arguments, the program chooses a random pattern.
-The program can simulate from any of the given patterns (although "Elemtary Knightship" was changed to "elementaryknightship")
+---
 
-I recommend one of the first two for reliability. If you want to compile and run yourself, clone the git repository to Intellij and:
-  Use the existing RunDesktop run configuration in .idea/runConfigurations
+**To run, you can either:**
 
-  OR
-  
-  Create a new run configuration, choose application
-  The main class is in lwjgl3/src/main/java/com/GameOfLife/lwjgl3/Lwjgl3Launcher.java
-  Add in the vm arguments -XstartOnFirstThread if you're on mac <-- essential
-  Then run it—Gradle should be preinstalled with intelliJ and be able to use the already-defined gradle scripts to build and run the project.
+- Run a `.jar`  
+- Run a `.app` bundle  
+- Or compile it yourself
 
-##Cool Features to Try Out
+---
+
+A compiled `.jar` and `.app` can be found in the `finalBuild` folder.
+
+The compiled `.app` bundle, which should have a JDK bundled with it, is found in the `finalBuild` folder.  
+The `.app` file is actually a folder — you can look inside it to find the `.jar` if you want to run that instead.  
+However, `.app` bundles can't be run with program arguments.
+
+---
+
+`.jar` files will have to be run from the command line to use program arguments.  
+Without program arguments, the app will choose a random pattern.
+
+To run a `.jar` on Mac:
+
+```bash
+java -jar -XstartOnFirstThread [JarName].java [arguments]
+```
+
+---
+
+The program can simulate from any of the given patterns  
+(although "Elemtary Knightship" was changed to "elementaryknightship").
+
+I recommend one of the first two for reliability.
+
+---
+
+**If you want to compile and run yourself, clone the git repository to IntelliJ and:**
+
+- Use the existing **RunDesktop** run configuration in `.idea/runConfigurations`  
+  OR  
+- Create a new run configuration, choose **Application**  
+  - The main class is in  
+    `lwjgl3/src/main/java/com/GameOfLife/lwjgl3/Lwjgl3Launcher.java`  
+  - Add the VM argument `-XstartOnFirstThread` if you're on Mac — *essential*  
+  - Then run it — Gradle should be preinstalled with IntelliJ and be able to use the already-defined Gradle scripts to build and run the project.
+
+## Cool Features to Try Out
 
 It also has different styles, which control how the cells look. You can set the style by passing in -style "style here" from the command line, or by using the drop-down selector.
 The available styles are default, seaLantern, redstone, and moss.
