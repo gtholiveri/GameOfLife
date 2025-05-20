@@ -21,7 +21,7 @@ Everything else is related to the library or build pipeline for libGDX.
 A compiled `.jar` and `.app` can be found in the `finalBuild` folder.
 
 The compiled `.app` bundle, which should have a JDK bundled with it, is found in the `finalBuild` folder.  
-The `.app` file is actually a folder — you can look inside it to find the `.jar` if you want to run that instead.  
+Can be run just with a double click.  
 However, `.app` bundles can't be run with program arguments.
 
 ---
