@@ -32,7 +32,7 @@ Without program arguments, the app will choose a random pattern.
 To run a `.jar` on Mac:
 
 ```bash
-java -jar -XstartOnFirstThread [JarName].java [arguments]
+java -jar -XstartOnFirstThread [JarName].jar [arguments]
 ```
 
 ---
